@@ -40,9 +40,9 @@ class AccessStudents(models.Model):
         Модель для одобрения доступа или же для изменения
     """
     product = models.ForeignKey(
-        "Product", on_delete=models.CASCADE, related_name="access_students"
+        "Product", on_delete=models.CASCADE, related_name="access_students", null=True
     )
-    user = models.ForeignKey("User", on_delete=models.CASCADE)
+    user = models.ForeignKey("User", on_delete=models.CASCADE, null=True)
     check_access = models.BooleanField(default=False)
 
     class Meta:
@@ -57,7 +57,7 @@ class Lesson(models.Model):
     """
         Модель для уроков
     """
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100)
     video = models.URLField()
 
@@ -73,7 +73,7 @@ class Group(models.Model):
     """
         Модель группы
     """
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100, default="default_group")
     user = models.ManyToManyField("User", related_name="groups")
     start_datetime = models.DateTimeField(auto_now_add=True, null=True)
